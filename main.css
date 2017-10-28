@@ -1,0 +1,22 @@
+.space-mono {
+  font-family: 'Space Mono', monospace;
+}
+
+.w3dot5 {
+  width: 3.5rem;
+}
+
+.h3dot5 {
+  height: 3.5rem;
+}
+
+.spinner {
+  animation-name: spin;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg);}
+    to { transform: rotateX(360deg);}
+}

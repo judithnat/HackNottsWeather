@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0" />
+
+  <title></title>
+
+  <link href="https://fonts.googleapis.com/css?family=Archivo+Black" rel="stylesheet">
+  <link rel="stylesheet" href="tachyons.css" />
+  <link rel="stylesheet" href="main.css" />
+
+  <link rel="shortcut icon" href="icon.png" />
+  <link rel="apple-touch-icon-precomposed" href="icon.png" />
+  <meta name="apple-mobile-web-app-title" content="" />
+  <link type="text/plain" rel="author" href="humans.txt" />
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Space+Mono:400,700" rel="stylesheet">
+
+</head>
+
+<body class="space-mono bg-near-white">
+  <div class="h2-ns h1 w-100 fixed bg-purple top-0 left-0 z-999"></div>
+  <div class="w2-ns w1 vh-100 fixed bg-purple top-0 right-0 z-999"></div>
+  <div class="h2-ns h1 w-100 fixed bg-purple bottom-0 left-0 z-999"></div>
+  <div class="w2-ns w1 vh-100 fixed bg-purple bottom-0 left-0 z-999"></div>
+
+  <p class="f1 purple tc b fixed top-0 ml5">Breathr <span class="js-questionmark br-100 ba bw2 dib h3 w3 tc b--purple bg-purple hover-bg-white bg-animate lh-copy white hover-purple"><span class="b v-top f2">?</span></p>
+
+  <div class="js-intro f1 db pa4 pt5 pt5-ns">
+    <p class="f3 b tc mt5">Thinking about going outside in ...</p>
+    <p><input class="w-100 mw6-ns f4 f2-ns space-mono js-input pa2 ba bw2 b--purple db tc center" type="text" name="" placeholder="... a city?" value=""></p>
+    <p class="js-error dn f3 tc center db mw6 red">Sorry! I sadly can&apos; find this city. Could you please try again?</p>
+    <p class="tc f3">Or pick one of these: </p>
+    <ul class="list pl0 dib tc ma0">
+      <li data-city="Manchester" class="pointer ma2 mv3 js-btn dib white br-pill pa3 bg-purple hover-bg-white bg-animate hover-purple ba bw2 b--purple">Manchester</li>
+      <li data-city="London" class="pointer ma2 mv3 js-btn dib white br-pill pa3 bg-purple hover-bg-white bg-animate hover-purple ba bw2 b--purple">London</li>
+      <li data-city="Nottingham" class="pointer ma2 mv3 mjs-btn dib white br-pill pa3 bg-purple hover-bg-white bg-animate hover-purple ba bw2 b--purple">Nottingham</li>
+      <li data-city="Birmingham" class="pointer ma2 mv3 js-btn dib white br-pill pa3 bg-purple hover-bg-white bg-animate hover-purple ba bw2 b--purple">Birmingham</li>
+      <li data-city="Norwich" class="pointer ma2 mv3 js-btn dib white br-pill pa3 bg-purple hover-bg-white bg-animate hover-purple ba bw2 b--purple">Norwich</li>
+    </ul>
+  </div>
+
+  <div class="dn js-info bg-near-white fixed top-0 left-0 w-100 vh-100 overflow-y-auto">
+    <ul class="list lh-copy f2 mw7-ns w-100 center tc v-mid">
+      <li class="dim js-close top-0 right-0 fixed ma5 mr5"><span class="br-100 ba bw2 dib h3 w3 tc b--purple"><img src="cross.svg" class="h2 w2" alt=""></span></li>
+      <li class="purple b">Um..?</li>
+      <li class="mv3"><span class="br-100 ba bw2 dib h3 w3 tc b--purple bg-purple"><span class="b v-top white f2">1</span></span> Choose your location!</li>
+      <li class="mv3"><span class="br-100 ba bw2 dib h3 w3 tc b--purple bg-purple"><span class="b v-top white f2">2</span></span> Get a recommendation of environmental factors to consider!</li>
+      <li class="mv3"><span class="br-100 ba bw2 dib h3 w3 tc b--purple bg-purple"><span class="b v-top white f2">3</span></span> ????</li>
+    </ul>
+  </div>
+
+  <div class="js-loading w-100 vh-100 fixed top-0 left-0 f2 dn">
+    <div class="relative dtc v-mid w-100 mw7-ns pa5 ma5 center z-1 tc white">
+      <p>Calling some servers!</p>
+      <p>Crunching some numbers!</p>
+      <img  class="spinner" src="crosswhite.svg" alt="">
+    </div>
+    <div class="top-0 left-0 w-100 vh-100 bg-black-90 fixed z-0"></div>
+  </div>
+
+  <div class="dn js-result pa6 vh-100 w-100 f1 lh-copy">
+    <p>Today in <span class="js-city b">Manchester</span>, try to breathe <span class="js-airquality b">easily</span>.</p>
+  </div>
+
+<script src="main.js"></script>
+</body>
+</html>
