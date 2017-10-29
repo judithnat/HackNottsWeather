@@ -20,3 +20,35 @@
     from { transform: rotate(0deg);}
     to { transform: rotateX(360deg);}
 }
+
+
+table{
+            width: 100%;
+            border: 2px solid black;
+            font-size: .4em;
+    margin-bottom: 2em;
+        }
+        
+        
+        th {
+            padding: 10px;
+        }
+        
+        #dark-blue{
+            background-color: darkblue;
+            color: azure
+        }
+        
+        #green {
+            background-color: greenyellow;
+        }
+        
+        #orange {
+            background-color: yellow;
+        }
+        
+        
+        #red {
+            background-color: red;
+        }
+    
