@@ -36,6 +36,7 @@ $('.js-input').keypress(function(e) {
                 console.log("this city exists!");
                 callApi(city);
             } else {
+                // city does not exist, display error message
               displayError();
             }
         })
@@ -43,13 +44,6 @@ $('.js-input').keypress(function(e) {
             displayError();
             console.log("there was a problem with the ajax???");
         });
-
-
-
-
-
-     // city does not exist, display error message
-
 
    }
 
@@ -65,110 +59,136 @@ function loading() {
   $(".js-loading").fadeIn();
 }
 
-
 function callApi(city) {
-
-    // successful
-    // -> put city name into results
-    $(".js-city").text(city);
-
-    // -> hand parameters to check
-    measurementCheck();
+  loading();
+    var jqxhr = $.ajax("https://api.openaq.org/v1/measurements?city=" + city + "&limit=1")
+    .done(function(data) {
+      console.log(data);
+      var parameters = [];
+      // results are successfully returned
+        parameters[0] = data.results[0].parameter;  // type of measurement
+        parameters[1] = data.results[0].value; // value of measurement
+        $(".js-city").text(city);
+        measurementCheck(parameters);
+    })
+    .fail(function() {
+      // if not api call fails, try again
+      callApi(city);
+    });
 }
-
 
 // check which measurements are available
-function measurementCheck() {
+function measurementCheck(parameters) {
+  console.log("measure chekc");
     // which parameter is available?
+    // compare to appropriate thresholds
+    var type = parameters[0];
+    var val = parameters[1];
+    var aq = "med";
 
+    // pm25, val, so2, no2, o3, co
+    if (type == "pm25") {
+      if (val <= 35){
+          aq = "low";
+      }
+      else if(val >35 && val <= 54){
+          aq = "med";
+      }
+      else if(val >54) {
+          aq = "hi";
+      }
 
+    } else if (type == "pm10") {
+      if (val <= 50){
+          aq = "low";
+      }
+      else if(val >50 && val < 75){
+          aq = "med";
+      }
+      else if(val >75) {
+          aq = "hi";
+      }
+
+    } else if (type == "so2") {
+      if (val <= 266){
+          aq = "low";
+      }
+      else if(val >266  &&  val < 533){
+          aq = "med";
+      }
+      else if(val >533) {
+          aq = "hi";
+      }
+
+    } else if (type == "no2") {
+      if (val <= 200){
+          aq = "low";
+      }
+      else if(val >200 && val < 401){
+          aq = "med";
+      }
+      else if(val >401) {
+          aq = "hi";
+      }
+
+    } else if (type == "o3") {
+      if (val <= 100){
+          aq = "low";
+      }
+      else if(val >100  && val < 161){
+          aq = "med";
+      }
+      else if(val > 161) {
+          aq = "hi";
+      }
+
+    } else {
+      console.log("unknown type eek");
+      // if unknown, maybe go for med?
+    }
+    displayResults(aq);
 }
 
-
-// compare to appropriate thresholds
-
-
 // change results section accordingly
-function changeResults(airquality) {
+function displayResults(airquality) {
+  console.log(airquality);
     var qualitySpan = $(".js-airquality");
-
     if (airquality == "low") {
         qualitySpan.text("carefully");
     } else if (airquality == "med") {
         qualitySpan.text("consciously");
-    } else {
+    } else if (airquality == "hi"){
         qualitySpan.text("easily");
     }
-
     loadingDone();
 }
 
 
 // display results and scroll to them
 function loadingDone() {
+  $(".js-result").show();
   $(".js-loading").fadeOut();
   $('html, body').animate({
        scrollTop: $(".js-result").offset().top
    }, 1500);
 }
 
-
-var PM2pt5 = prompt("Enter value for PM2.5 between 0 and 80 mg/m-3");
-var PM10 = prompt("Enter value for PM10 between 0 and 120 mg/m-3");
-var SO2 = prompt("Enter value for S02 between 0 and 1200 mg/m-3");
-var NO2 = prompt("Enter value for NO2 between 0 and 700 mg/m-3");
-var ozone = prompt("Enter value for ozone between 0 and 400 mg/m-3");
-
-
-if (PM2pt5 <= 35){
-    console.log('Air Quality Index for PM2.5 is' + 'low');
-}
-else if(PM2pt5 >35 && PM2pt5 <= 54){
-    console.log('Air Quality Index for PM2.5 is' + 'moderate');
-}
-else if(PM2pt5 >54) {
-    console.log('Air Quality Index for PM2.5 is' + 'high');
-}
+/*
+var val = prompt("Enter value for PM2.5 between 0 and 80 mg/m-3");
+var val = prompt("Enter value for val between 0 and 120 mg/m-3");
+var val = prompt("Enter value for S02 between 0 and 1200 mg/m-3");
+var val = prompt("Enter value for val between 0 and 700 mg/m-3");
+var val = prompt("Enter value for val between 0 and 400 mg/m-3");
 
 
-if (PM10 <= 50){
-    console.log('Air Quality Index for PM10 is' + 'low');
-}
-else if(PM10 >50 && PM10 < 75){
-    console.log('Air Quality Index for PM10 is' + 'moderate');
-}
-else if(PM10 >75) {
-    console.log('Air Quality Index for PM10 is' + 'high');
-}
 
 
-if (SO2 <= 266){
-    console.log('Air Quality Index for S02 is' + 'low');
-}
-else if(SO2 >266  &&  SO2 < 533){
-    console.log('Air Quality Index for S02 is' + 'moderate');
-}
-else if(SO2 >533) {
-    console.log('Air Quality Index for S02 is' + 'high');
-}
 
 
-if (NO2 <= 200){
-    console.log('Air Quality Index for N02 is' + 'low');
-}
-else if(NO2 >200 && NO2 < 401){
-    console.log('Air Quality Index for N02 is' + 'moderate');
-}
-else if(NO2 >401) {
-    console.log('Air Quality Index for N02 is' + 'high');
-}
 
-if (ozone <= 100){
-    console.log('Air Quality Index for ozone is' + 'low');
-}
-else if(ozone >100  && ozone < 161){
-    console.log('Air Quality Index for ozone is' + 'moderate');
-}
-else if(ozone > 161) {
-    console.log('Air Quality Index for ozone is' + 'high');
-}
+
+
+
+
+
+*/
