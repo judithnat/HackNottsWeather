@@ -154,11 +154,11 @@ function displayResults(airquality) {
   console.log(airquality);
     var qualitySpan = $(".js-airquality");
     if (airquality == "low") {
-        qualitySpan.text("carefully");
+        qualitySpan.text("easily");
     } else if (airquality == "med") {
         qualitySpan.text("consciously");
     } else if (airquality == "hi"){
-        qualitySpan.text("easily");
+        qualitySpan.text("carefully");
     }
     loadingDone();
 }
